@@ -1,4 +1,5 @@
 import yaml
+import datetime
 
 class FileUtil:
 
@@ -32,3 +33,14 @@ class FileUtil:
         lines = [s + '\n' for s in rows]
         with open(filename, "w") as f:
             f.writelines(lines)
+    
+    # ユニークなディレクトリ名を取得
+    @staticmethod
+    def get_save_directory(prefix):
+        if prefix is not "":
+            prefix = prefix + "-"
+        datetime_fmt = datetime.datetime.today()
+        body = datetime_fmt.strftime("%Y%m%d-%H%M%S")
+        return prefix + body + "/"
+
+

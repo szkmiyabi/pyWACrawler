@@ -52,6 +52,15 @@ class LibraDriver:
     # screenshotを撮る
     def screenshot(self, filename):
         self.wd.save_screenshot(filename)
+
+    # フルページscreenshot
+    def fullpage_screenshot(self, filename):
+        # chrome only
+        required_width = self.wd.execute_script('return document.body.parentNode.scrollWidth')
+        required_height = self.wd.execute_script('return document.body.parentNode.scrollHeight')
+        self.wd.set_window_size(required_width, required_height)
+        self.wd.find_element_by_tag_name('body').screenshot(filename)
+        self.wd.set_window_size(1280, 900)
     
     # シャットダウン
     def shutdown(self):
@@ -102,7 +111,7 @@ class LibraDriver:
         for row in rows:
             td_val = row.text
             urls.append(td_val)
-        for i in range(0, map_cnt - 1):
+        for i in range(0, map_cnt):
             datas[pids[i]] = urls[i]
         return datas
     
