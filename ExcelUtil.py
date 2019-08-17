@@ -1,5 +1,6 @@
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill, Border, Side, Font, Alignment
+from DateUtil import DateUtil
 
 class ExcelUtil:
 
@@ -35,10 +36,10 @@ class ExcelUtil:
             cellobj = ws.cell(row=r, column=6)
             if cellobj.value == "適合":
                 for i in range(1, len(parent_row)+1):
-                    ws.cell(row=r, column=i).fill = PatternFill(fill_type="solid", fgColor="FF40FFFF")
+                    ws.cell(row=r, column=i).fill = PatternFill(fill_type="solid", fgColor="FF00CCFF")
             elif cellobj.value == "適合(注記)":
                 for i in range(1, len(parent_row)+1):
-                    ws.cell(row=r, column=i).fill = PatternFill(fill_type="solid", fgColor="FF40FF40")
+                    ws.cell(row=r, column=i).fill = PatternFill(fill_type="solid", fgColor="FF00FF00")
             elif cellobj.value == "不適合":
                 for i in range(1, len(parent_row)+1):
                     ws.cell(row=r, column=i).fill = PatternFill(fill_type="solid", fgColor="FFFF8080")
@@ -48,8 +49,8 @@ class ExcelUtil:
             else:
                 pass
             r += 1
-        rangeobj = range(1, 10)
+        rangeobj = range(1, 10 + 1)
         for i in rangeobj:
             ws.cell(row=1, column=i).font = Font(bold=True)
             ws.cell(row=1, column=i).alignment = Alignment(horizontal="center")
-        wb.save(self.fetch_filename_from_datetime(".xlsx"))
+        wb.save(DateUtil.fetch_filename_from_datetime("xlsx"))
