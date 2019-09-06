@@ -33,6 +33,7 @@ class LibraDriver:
             options = ChromeOptions()
             options.executable_path = "/usr/bin/google-chrome"
             options.add_argument("--headless")
+            options.add_argument("--dns-prefetch-disable")
             self.wd = webdriver.Chrome(options=options)
         else:
             pass
